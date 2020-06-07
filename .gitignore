@@ -1,4 +1,3 @@
-env.py
 *.log
 venv/*
 .idea/*
