@@ -1,14 +1,15 @@
 from src.handlers.handler import Handler
+from src.keyboard import start_kb
+import src.dbworker as dbw
+
 
 class CommandHandler(Handler):
     def activate(self):
-        self.add_handler(self.help, commands=['help'])
-        self.add_handler(self.start, commands=['start'])
+        self.add_handler(self.help, commands=['help', 'start'])
 
-    # /help
     def help(self, m):
-        self.bot.send_message(m.chat.id, 'Hello, its help message')
+        self.bot.send_message(m.chat.id,
+                         "Я бот-агрегатор обзоров от канала @streeteda. Я помогу тебе с выбором заведения 🙃",
+                         reply_markup=start_kb)
+        dbw.add_user(m.chat.id, m.from_user.username)
 
-    # /start
-    def start(self, m):
-        self.bot.send_message(m.chat.id, 'Glad to see you, old friend')
